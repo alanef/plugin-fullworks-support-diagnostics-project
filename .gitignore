@@ -1,0 +1,28 @@
+# Composer
+/vendor/
+/support-assiant-for-wp/vendor/
+
+
+# Support Assistant Plugin's vendor
+/fullworks-support-diagnostics/vendor/
+
+# PHPUnit
+/tests/coverage/
+.phpunit.result.cache
+
+# PhpStorm/IDE files
+.idea/
+*.iml
+*.iws
+.DS_Store
+
+# Node modules
+/node_modules/
+
+# Build files
+/build/
+/dist/
+
+# Misc
+Thumbs.db
+*.log

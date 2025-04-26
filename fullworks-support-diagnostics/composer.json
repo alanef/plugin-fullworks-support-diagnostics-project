@@ -1,0 +1,21 @@
+{
+    "name": "fullworks/fullworks-support-diagnostics",
+    "description": "A generic diagnostic tool for WordPress sites that automatically discovers compatible plugins and collects support information.",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "autoload": {
+        "psr-4": {
+            "Fullworks\\SupportAssistant\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Fullworks",
+            "email": "support@fullworksplugins.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=7.0"
+    }
+}

@@ -1,0 +1,55 @@
+{
+    "plugin_info": {
+        "name": "Example Plugin",
+        "version": "1.0.0",
+        "author": "Plugin Author",
+        "website": "https://example.com",
+        "support_url": "https://example.com/support"
+    },
+    "options_to_extract": [
+        {
+            "option_name": "example_plugin_settings",
+            "label": "Plugin Settings",
+            "sensitive_fields": ["api_key", "secret_token"],
+            "mask_sensitive": true
+        },
+        {
+            "option_name": "example_plugin_cache",
+            "label": "Plugin Cache",
+            "summary_only": true,
+            "summary_fields": ["last_updated", "version"]
+        }
+    ],
+    "shortcodes": [
+        "example_shortcode",
+        "another_shortcode"
+    ],
+    "debug_constants": {
+        "EXAMPLE_DEBUG": "Example Plugin Debug Mode",
+        "EXAMPLE_LOG_LEVEL": "Example Plugin Log Level"
+    },
+    "database_tables": [
+        {
+            "prefix": "example_",
+            "include_row_counts": true
+        }
+    ],
+    "debug_logs": [
+        {
+            "path": "logs/debug.log",
+            "name": "Example Plugin Debug Log"
+        }
+    ],
+    "transients": [
+        {
+            "prefix": "example_",
+            "include_keys_only": true
+        }
+    ],
+    "freemius": {
+        "global_variable": "example_fs",
+        "module_id": 12345,
+        "slug": "example-plugin",
+        "_comment": "The Freemius SDK fires a {global_variable}_loaded action (e.g., example_fs_loaded) when initialized, which this plugin hooks into to capture the Freemius state"
+    }
+}

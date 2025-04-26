@@ -1,0 +1,15 @@
+parameters:
+    level: 6
+    paths:
+        - fullworks-support-diagnostics/src
+    excludePaths:
+        - fullworks-support-diagnostics/vendor
+    scanDirectories:
+        - fullworks-support-diagnostics/vendor
+    bootstrapFiles:
+        - vendor/szepeviktor/phpstan-wordpress/bootstrap.php
+    ignoreErrors:
+        - '#^Unsafe usage of new static\(\)\.#'
+    inferPrivatePropertyTypeFromConstructor: true
+    checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
