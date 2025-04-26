@@ -1,4 +1,4 @@
-=== Plugin Support Diagnostics ===
+=== Fullworks Support Diagnostics ===
 Contributors: alanfuller
 Tags: support, diagnostics, troubleshooting
 Requires at least: 5.8

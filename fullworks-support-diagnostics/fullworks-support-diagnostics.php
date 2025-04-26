@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Plugin Support Diagnostics
+ * Plugin Name: Fullworks Support Diagnostics
  * Plugin URI: https://fullworksplugins.com/
  * Description: Generates diagnostic information for support purposes based on plugin configurations.
  * Version: 1.0.0
