@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Fullworks Support Diagnostics
- * Plugin URI: https://fullworksplugins.com/
+ * Plugin URI: https://fullworksplugins.com/products/support-diagnostics/
  * Description: Generates diagnostic information for support purposes based on plugin configurations.
  * Version: 1.0.0
  * Author: Fullworks

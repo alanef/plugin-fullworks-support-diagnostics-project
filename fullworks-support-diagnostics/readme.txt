@@ -1,6 +1,6 @@
 === Fullworks Support Diagnostics ===
 Contributors: alanfuller
-Tags: support, diagnostics, troubleshooting
+Tags: support, diagnostics, troubleshooting, debug, wp-config
 Requires at least: 5.8
 Tested up to: 6.8
 Stable tag: 1.0.0
@@ -8,47 +8,122 @@ Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-A diagnostic tool that helps plugin developers provide better support by collecting relevant system information.
+A diagnostic tool that helps plugin developers provide better support by collecting relevant system information and managing debug constants.
 
 == Description ==
 
-Plugin Support Diagnostics makes it easier for plugin developers to troubleshoot issues by automatically collecting diagnostic information. It discovers installed plugins and provides a framework for plugin-specific diagnostic data collection.
+Fullworks Support Diagnostics makes it easier for plugin developers to troubleshoot issues by automatically collecting diagnostic information and providing powerful debugging tools. It discovers installed plugins and provides a framework for plugin-specific diagnostic data collection.
 
-Features:
+This plugin should only be activated when instructed by plugin support personnel for diagnostic purposes.
 
-* Automatic plugin discovery
-* System information collection
-* REST API endpoints for diagnostics
-* Customizable diagnostic data collection
-* Easy integration with existing plugins
+= Key Features =
+
+* **Automatic plugin discovery** - Detects compatible plugins with support-config.json files
+* **System information collection** - Gathers essential WordPress environment data
+* **wp-config.php debug management** - Safely modify debug constants with automatic backups
+* **Shortcode scanning** - Identifies shortcodes used across your site
+* **Freemius integration** - Collects license status and Freemius state for premium plugins
+* **REST API endpoints** - Allows secure remote diagnostics with temporary access links
+* **Sensitive data protection** - Masks API keys and other confidential information
+* **Debug log monitoring** - Checks and displays the most recent log entries
+
+= Debug Management =
+
+The plugin can safely manage debug constants in wp-config.php:
+
+* Enable/disable WordPress debugging with a single click
+* Automatically creates backups of wp-config.php before any modifications
+* Clearly marks all changes with comment blocks for easy identification
+* Safely removes all modifications when the feature is disabled
+* Monitors debug log files for recent entries
+
+= Security Considerations =
+
+* All wp-config.php modifications require explicit admin confirmation
+* Access keys can be regenerated at any time
+* Temporary access links expire after 24 hours
+* API keys and sensitive data are masked in diagnostic reports
+* REST API endpoint can be disabled if not needed
 
 == Installation ==
 
 1. Upload the plugin files to the `/wp-content/plugins/fullworks-support-diagnostics` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress
 3. Use the Tools->Plugin Support Diagnostics screen to configure the plugin
+4. **IMPORTANT**: Only activate and use this plugin when instructed by plugin support personnel
+
+== Usage Instructions ==
+
+= For Site Owners =
+
+1. **Only install when directed by support personnel**
+2. Go to Tools → Plugin Support Diagnostics in your WordPress admin
+3. If instructed, enable debug management and select appropriate debug constants
+4. Click "Generate Diagnostic Data"
+5. Share the diagnostic information with support using one of these methods:
+   * Copy to clipboard
+   * Download as JSON
+   * Use the temporary direct access link (valid for 24 hours)
+6. When troubleshooting is complete, disable any debug options and consider deactivating the plugin
+
+= For Plugin Developers =
+
+To make your plugin compatible with Support Diagnostics, create a `support-config.json` file in your plugin's root directory. See the example-support-config.json file included in the plugin for reference.
 
 == Frequently Asked Questions ==
 
-= How do I integrate this with my plugin? =
+= Is it safe to modify wp-config.php? =
 
-Add a support-config.json file to your plugin directory. See example-support-config.json for reference.
+Yes, with appropriate caution. The plugin:
+1. Creates a backup of wp-config.php before any changes
+2. Uses the WordPress filesystem API for all operations
+3. Clearly marks all changes with comment blocks
+4. Provides a UI that clearly explains all modifications
+5. Automatically removes changes when disabled
+6. Requires admin privileges to make any changes
 
 = What information is collected? =
 
-The plugin collects basic WordPress environment information and plugin-specific data as configured in the support-config.json file.
+The plugin collects:
+* Basic WordPress environment information
+* Plugin-specific data as configured in support-config.json files
+* Current status of debug constants
+* Shortcode usage across the site
+* Database table information for specific plugins
+* License/activation status for premium plugins (via Freemius)
+* Recent debug log entries when available
+
+= How do I integrate this with my plugin? =
+
+Add a support-config.json file to your plugin directory with specific diagnostics configuration. See example-support-config.json for reference.
+
+= How do I share diagnostic data securely? =
+
+The plugin provides three methods:
+1. Copy the data to your clipboard
+2. Download the data as a JSON file
+3. Generate a temporary access link (valid for 24 hours) that support personnel can use to access the diagnostics remotely
+
+= Can I disable remote access to diagnostics? =
+
+Yes, the REST API endpoint can be disabled in the plugin settings. You can also regenerate access keys at any time for security.
 
 == Screenshots ==
 
 1. The main diagnostic dashboard
 2. Example diagnostic report
+3. Debug constants management interface
+4. Freemius integration for premium plugins
 
 == Changelog ==
 
 = 1.0.0 =
 * Initial release
+* Added wp-config.php debug constant management with safety features
+* Implemented Freemius module detection and data collection
+* Added REST API endpoints for remote diagnostics
 
 == Upgrade Notice ==
 
 = 1.0.0 =
-Initial release
+Initial release with wp-config.php management features
