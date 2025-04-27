@@ -101,12 +101,22 @@ class Main {
         if (!empty($defined_constants)) {
             // Add an admin notice to show which debug constants are being set
             add_action('admin_notices', function() use ($defined_constants) {
-                if (isset($_GET['page']) && $_GET['page'] === 'fullworks-support-diagnostics') {
-                    echo '<div class="notice notice-success is-dismissible">';
-                    echo '<p><strong>Debug Constants Enabled:</strong> The following constants were set: <code>' . 
-                        implode('</code>, <code>', $defined_constants) . '</code></p>';
-                    echo '</div>';
+                // Only show this notice on the plugin's admin page
+                $screen = get_current_screen();
+                if (!$screen || $screen->base !== 'tools_page_fullworks-support-diagnostics') {
+                    return;
                 }
+                
+                // Security: WordPress automatically cleans the admin screen ID,
+                // so we don't need additional nonce verification for displaying a notice
+                
+                echo '<div class="notice notice-success is-dismissible">';
+                echo '<p><strong>' . esc_html__('Debug Constants Enabled:', 'fullworks-support-diagnostics') . '</strong> ' . 
+                     esc_html__('The following constants were set:', 'fullworks-support-diagnostics') . ' <code>';
+                // Properly escape each constant name in the array
+                echo implode('</code>, <code>', array_map('esc_html', $defined_constants));
+                echo '</code></p>';
+                echo '</div>';
             });
         }
     }

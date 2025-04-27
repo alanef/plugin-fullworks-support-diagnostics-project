@@ -375,7 +375,7 @@ class AdminPage {
 		
 		echo '<p><label class="fwpsd-big-checkbox" style="font-weight: bold; font-size: 1.1em; padding: 8px; background: #f0f0f0; border: 1px solid #ddd; display: inline-block; border-radius: 4px;">';
 		echo '<input type="checkbox" id="fwpsd-manage-debug-constants" name="' . esc_attr(Main::OPTION_NAME) . '[manage_debug_constants]" value="1" ' . checked($manage_debug, true, false) . ' style="margin-right: 5px; transform: scale(1.5);">';
-		echo ' Enable management of debug constants in wp-config.php</label></p>';
+		echo ' ' . esc_html__('Enable management of debug constants in wp-config.php', 'fullworks-support-diagnostics') . '</label></p>';
 
 		echo '<p><strong>Current status:</strong> Debug constants management is ' .
 		     ($manage_debug ? '<span style="color: green;">enabled</span>' : '<span style="color: red;">disabled</span>') .
@@ -433,9 +433,19 @@ class AdminPage {
             echo '<tr>';
             echo '<td><code>' . esc_html($constant) . '</code></td>';
             echo '<td>' . esc_html($description) . '</td>';
-            echo '<td>' . ($current_value === true ? '<span style="color: green;">true</span>' : 
-                        ($current_value === false ? '<span style="color: red;">false</span>' : 
-                        esc_html($current_value))) . '</td>';
+            // Format the current value with proper escaping and translation
+            if ($current_value === true) {
+                echo '<td><span style="color: green;">' . esc_html__('true', 'fullworks-support-diagnostics') . '</span></td>';
+            } elseif ($current_value === false) {
+                echo '<td><span style="color: red;">' . esc_html__('false', 'fullworks-support-diagnostics') . '</span></td>';
+            } else {
+                // For non-boolean values, we need to handle the "Not Defined" text as translatable
+                if ($current_value === 'Not Defined') {
+                    echo '<td>' . esc_html__('Not Defined', 'fullworks-support-diagnostics') . '</td>';
+                } else {
+                    echo '<td>' . esc_html($current_value) . '</td>';
+                }
+            }
             echo '<td>' . esc_html($source) . '</td>';
             echo '<td><input type="checkbox" name="' . esc_attr(Main::OPTION_NAME) . '[debug_constants][' . esc_attr($constant) . ']" value="1" ' . checked($is_enabled, true, false) . '></td>';
             echo '</tr>';
@@ -863,10 +873,13 @@ class AdminPage {
         wp_enqueue_script(
             'fwpsd-admin-script',
             $plugin_dir_url . 'admin.js',
-            ['jquery'],
+            ['jquery', 'wp-i18n'], // Add wp-i18n as a dependency for translations
             Main::VERSION,
             true
         );
+        
+        // Set up script translations
+        wp_set_script_translations('fwpsd-admin-script', 'fullworks-support-diagnostics');
 
         wp_localize_script('fwpsd-admin-script', 'psdData', [
             'ajaxUrl' => admin_url('admin-ajax.php'),

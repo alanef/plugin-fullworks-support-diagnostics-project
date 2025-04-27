@@ -1,3 +1,6 @@
+// Import translation functions from WordPress
+const { __, _x, sprintf } = wp.i18n;
+
 jQuery(document).ready(function($) {
     // Get the active tab from URL params, URL hash, or localStorage
     function getActiveTab() {
@@ -67,11 +70,15 @@ jQuery(document).ready(function($) {
     $('#fwpsd-manage-debug-constants').on('change', function() {
         if (this.checked) {
             var confirmed = confirm(
-                "WARNING: This will modify your wp-config.php file.\n\n" +
-                "• A backup will be created before changes\n" +
-                "• Debug constants you select will be added to wp-config.php\n" +
-                "• This can change your site's behavior and error logging\n\n" +
-                "Are you sure you want to enable debug constants management?"
+                // Use WordPress i18n functions for translatable strings
+                sprintf(
+                    '%s\n\n• %s\n• %s\n• %s\n\n%s',
+                    __('WARNING: This will modify your wp-config.php file.', 'fullworks-support-diagnostics'),
+                    __('A backup will be created before changes', 'fullworks-support-diagnostics'),
+                    __('Debug constants you select will be added to wp-config.php', 'fullworks-support-diagnostics'),
+                    __('This can change your site\'s behavior and error logging', 'fullworks-support-diagnostics'),
+                    __('Are you sure you want to enable debug constants management?', 'fullworks-support-diagnostics')
+                )
             );
             
             if (!confirmed) {
@@ -93,7 +100,7 @@ jQuery(document).ready(function($) {
         var $button = $(this);
         var $resultArea = $('#wpsa-diagnostic-result');
 
-        $button.prop('disabled', true).text('Generating...');
+        $button.prop('disabled', true).text(__('Generating...', 'fullworks-support-diagnostics'));
 
         $.ajax({
             url: psdData.ajaxUrl,
@@ -127,7 +134,7 @@ jQuery(document).ready(function($) {
                 alert('Error: Could not communicate with the server. ' + error);
             },
             complete: function() {
-                $button.prop('disabled', false).text('Generate Diagnostic Data');
+                $button.prop('disabled', false).text(__('Generate Diagnostic Data', 'fullworks-support-diagnostics'));
             }
         });
     });
@@ -141,7 +148,7 @@ jQuery(document).ready(function($) {
         // Show temporary success message
         var $button = $(this);
         var originalText = $button.text();
-        $button.text('Copied!');
+        $button.text(__('Copied!', 'fullworks-support-diagnostics'));
         setTimeout(function() {
             $button.text(originalText);
         }, 2000);
@@ -166,12 +173,12 @@ jQuery(document).ready(function($) {
 
     // Regenerate keys
     $('#wpsa-regenerate-keys').on('click', function() {
-        if (!confirm('Are you sure you want to regenerate the access keys? Any existing links using the current keys will stop working.')) {
+        if (!confirm(__('Are you sure you want to regenerate the access keys? Any existing links using the current keys will stop working.', 'fullworks-support-diagnostics'))) {
             return;
         }
 
         var $button = $(this);
-        $button.prop('disabled', true).text('Regenerating...');
+        $button.prop('disabled', true).text(__('Regenerating...', 'fullworks-support-diagnostics'));
 
         $.ajax({
             url: psdData.ajaxUrl,
@@ -196,7 +203,7 @@ jQuery(document).ready(function($) {
                 alert('Error: Could not communicate with the server.');
             },
             complete: function() {
-                $button.prop('disabled', false).text('Regenerate Keys');
+                $button.prop('disabled', false).text(__('Regenerate Keys', 'fullworks-support-diagnostics'));
             }
         });
     });
