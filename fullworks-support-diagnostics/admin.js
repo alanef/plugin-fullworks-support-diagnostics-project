@@ -1,18 +1,84 @@
 jQuery(document).ready(function($) {
+    // Get the active tab from URL params, URL hash, or localStorage
+    function getActiveTab() {
+        // First check URL param (used when redirecting after form submission)
+        var urlParams = new URLSearchParams(window.location.search);
+        var tabParam = urlParams.get('tab');
+        if (tabParam && $('#' + tabParam).length) {
+            return tabParam;
+        }
+        
+        // Check URL hash next
+        var hashTab = window.location.hash.substring(1);
+        if (hashTab && $('#' + hashTab).length) {
+            return hashTab;
+        }
+        
+        // Then check localStorage
+        var storedTab = localStorage.getItem('fwpsd_active_tab');
+        if (storedTab && $('#' + storedTab).length) {
+            return storedTab;
+        }
+        
+        // Default to diagnostics tab
+        return 'diagnostics';
+    }
+    
+    // Set the active tab
+    function setActiveTab(tabId) {
+        // Update tab classes
+        $('.nav-tab').removeClass('nav-tab-active');
+        $('a[href="#' + tabId + '"]').addClass('nav-tab-active');
+        
+        // Show/hide content
+        $('.tab-content').hide();
+        $('#' + tabId).show();
+        
+        // Store in localStorage
+        localStorage.setItem('fwpsd_active_tab', tabId);
+        
+        // Update URL hash (without page reload)
+        if (history.pushState) {
+            history.pushState(null, null, '#' + tabId);
+        } else {
+            window.location.hash = '#' + tabId;
+        }
+    }
+    
+    // Initialize active tab
+    setActiveTab(getActiveTab());
+    
     // Tab navigation
     $('.nav-tab').on('click', function(e) {
         e.preventDefault();
-
+        
         // Get the target tab
         var target = $(this).attr('href').substring(1);
-
-        // Update active tab
-        $('.nav-tab').removeClass('nav-tab-active');
-        $(this).addClass('nav-tab-active');
-
-        // Show/hide tab content
-        $('.tab-content').hide();
-        $('#' + target).show();
+        
+        // Update URL with the tab parameter (without reloading)
+        var url = new URL(window.location.href);
+        url.searchParams.set('tab', target);
+        history.replaceState(null, '', url);
+        
+        setActiveTab(target);
+    });
+    
+    // Add confirmation for debug constant management
+    $('#fwpsd-manage-debug-constants').on('change', function() {
+        if (this.checked) {
+            var confirmed = confirm(
+                "WARNING: This will modify your wp-config.php file.\n\n" +
+                "• A backup will be created before changes\n" +
+                "• Debug constants you select will be added to wp-config.php\n" +
+                "• This can change your site's behavior and error logging\n\n" +
+                "Are you sure you want to enable debug constants management?"
+            );
+            
+            if (!confirmed) {
+                this.checked = false;
+                return false;
+            }
+        }
     });
 
     // Make sure the psdData object exists
@@ -22,7 +88,7 @@ jQuery(document).ready(function($) {
     }
 
     // Generate diagnostic data
-    $('#fwpsd-generate-data').on('click', function() {
+    $('#wpsa-generate-data').on('click', function() {
         console.log('Generate diagnostic data button clicked');
         var $button = $(this);
         var $resultArea = $('#wpsa-diagnostic-result');
@@ -30,11 +96,11 @@ jQuery(document).ready(function($) {
         $button.prop('disabled', true).text('Generating...');
 
         $.ajax({
-            url: wpsaData.ajaxUrl,
+            url: psdData.ajaxUrl,
             type: 'POST',
             data: {
-                action: 'wpsa_generate_diagnostic_data',
-                nonce: wpsaData.nonce
+                action: 'fwpsd_generate_diagnostic_data',
+                nonce: psdData.nonce
             },
             success: function(response) {
                 console.log('AJAX response received:', response);
@@ -108,17 +174,17 @@ jQuery(document).ready(function($) {
         $button.prop('disabled', true).text('Regenerating...');
 
         $.ajax({
-            url: wpsaData.ajaxUrl,
+            url: psdData.ajaxUrl,
             type: 'POST',
             data: {
-                action: 'wpsa_regenerate_keys',
-                nonce: wpsaData.nonce
+                action: 'fwpsd_regenerate_keys',
+                nonce: psdData.nonce
             },
             success: function(response) {
                 if (response.success) {
                     // Update the displayed keys
-                    wpsaData.accessKey = response.data.access_key;
-                    wpsaData.restEndpointKey = response.data.rest_endpoint_key;
+                    psdData.accessKey = response.data.access_key;
+                    psdData.restEndpointKey = response.data.rest_endpoint_key;
 
                     // Reload the page to show updated keys
                     window.location.href = window.location.href + '&keys_regenerated=1';

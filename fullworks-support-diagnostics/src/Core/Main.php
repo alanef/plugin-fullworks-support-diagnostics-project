@@ -51,8 +51,9 @@ class Main {
     private $diagnostics_endpoint;
 
     public function __construct() {
-        // Define debug constants at the earliest point possible
-        add_action('plugins_loaded', [$this, 'define_debug_constants'], 0);
+        // This constructor is called during the plugins_loaded hook (priority 5)
+        // Debug constants are now handled by modifying wp-config.php directly,
+        // rather than defining them at runtime
         
         $this->settings = wp_parse_args(
             get_option(self::OPTION_NAME, []),
@@ -78,17 +79,35 @@ class Main {
      * Define debug constants if not already defined
      */
     public function define_debug_constants() {
+        // Always refresh settings from the database to ensure we have the latest values
+        // This is important as other parts of the code may have updated these settings
+        $this->settings = get_option(self::OPTION_NAME, $this->default_settings);
+        
         // Skip if debug management not enabled in settings
         if (empty($this->settings['manage_debug_constants'])) {
             return;
         }
         
         // Loop through debug constants that should be enabled
+        $defined_constants = [];
         foreach ($this->known_debug_constants as $constant => $description) {
             if (!defined($constant) && isset($this->settings['debug_constants'][$constant]) && 
                 $this->settings['debug_constants'][$constant]) {
                 define($constant, true);
+                $defined_constants[] = $constant;
             }
+        }
+        
+        if (!empty($defined_constants)) {
+            // Add an admin notice to show which debug constants are being set
+            add_action('admin_notices', function() use ($defined_constants) {
+                if (isset($_GET['page']) && $_GET['page'] === 'fullworks-support-diagnostics') {
+                    echo '<div class="notice notice-success is-dismissible">';
+                    echo '<p><strong>Debug Constants Enabled:</strong> The following constants were set: <code>' . 
+                        implode('</code>, <code>', $defined_constants) . '</code></p>';
+                    echo '</div>';
+                }
+            });
         }
     }
 
@@ -133,6 +152,9 @@ class Main {
         
         // Set up Freemius integration hooks
         $this->setup_freemius_hooks();
+        
+        // Note: We no longer need to define constants at runtime as they should be in wp-config.php now
+        // The define_debug_constants() method is still present for backward compatibility but not actively used
     }
     
     /**
