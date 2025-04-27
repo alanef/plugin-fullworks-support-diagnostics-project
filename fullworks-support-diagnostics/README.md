@@ -11,10 +11,11 @@ This plugin helps collect essential diagnostic information from WordPress sites 
 - **Automatic Plugin Discovery**: Scans for plugins with `support-config.json` files
 - **Configurable Data Collection**: Each plugin defines exactly what data to collect
 - **Shortcode Scanning**: Finds shortcodes used across posts and pages
-- **Debug Management**: Manages WordPress and plugin debug constants
+- **wp-config.php Debug Management**: Safely modify debug constants with automatic backups
 - **Freemius Integration**: Collects license status and Freemius state for premium plugins
 - **Secure REST API Access**: Generate temporary access links for remote diagnostics
-- **Sensitive Data Protection**: Masks API keys and other sensitive information
+- **Advanced Sensitive Data Protection**: Recursively masks API keys and confidential information at any nesting level
+- **Debug Log Monitoring**: Checks and displays the most recent log entries
 - **No Hardcoded Defaults**: Purely configuration-driven behavior
 
 ## Installation
@@ -111,10 +112,59 @@ To make your plugin compatible with the Support Assistant, create a `support-con
 Array of WordPress options to collect:
 - `option_name`: The option name in the wp_options table
 - `label`: Human-readable label for the option
-- `sensitive_fields`: Array of field names that contain sensitive data
+- `sensitive_fields`: Array of field names that contain sensitive data (works with fields at any nesting level)
 - `mask_sensitive`: Whether to mask sensitive fields
 - `summary_only`: For large options, only extract summary information
 - `summary_fields`: Specific fields to include in the summary
+
+**Sensitive Fields Handling**
+The plugin recursively scans through all levels of your data structure to find and mask sensitive fields. For example:
+```json
+{
+  "plugin_settings": {
+    "general": {
+      "enabled": true
+    },
+    "api": {
+      "endpoint": "https://api.example.com",
+      "key": "abcd1234efgh5678"
+    },
+    "connections": [
+      {
+        "name": "Primary",
+        "api_key": "primary12345key",
+        "active": true
+      },
+      {
+        "name": "Backup",
+        "api_key": "backup98765key",
+        "active": false
+      }
+    ],
+    "Main Settings": {
+      "cache_clear": 0,
+      "cache_duration": 86400,
+      "key": [
+        {
+          "key": "JO7XNPSGZPZ4HXMPYIR4",
+          "label": "API Key 1"
+        }
+      ]
+    }
+  }
+}
+```
+If your `sensitive_fields` array includes both `"key"` and `"api_key"`, all instances will be masked regardless of nesting level, including:
+- The `key` in `plugin_settings.api.key`
+- The `api_key` in both connection objects
+- The `key` array in `Main Settings.key`
+- And the `key` property inside each item of the `key` array
+
+To set this up, simply add these fields to your support-config.json:
+```json
+"sensitive_fields": ["api_key", "key", "secret_token", "password", "auth_token"],
+"mask_sensitive": true
+```
 
 #### Database Tables
 - `prefix`: The prefix for your plugin's tables (without wp_ prefix)

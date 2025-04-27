@@ -149,17 +149,11 @@ class DiagnosticData {
                         $option_config['mask_sensitive'] &&
                         is_array($option_value)) {
 
-                        foreach ($option_config['sensitive_fields'] as $sensitive_field) {
-                            if (isset($option_value[$sensitive_field])) {
-                                $sensitive_value = $option_value[$sensitive_field];
-                                $value_length = strlen($sensitive_value);
-
-                                if ($value_length > 8) {
-                                    $visible_part = substr($sensitive_value, 0, 4) . '...' . substr($sensitive_value, -4);
-                                    $option_value[$sensitive_field] = $visible_part;
-                                }
-                            }
-                        }
+                        // Use recursive function to mask sensitive fields at any nesting level
+                        $option_value = $this->mask_sensitive_fields_recursive(
+                            $option_value,
+                            $option_config['sensitive_fields']
+                        );
                     }
 
                     $plugin_settings[$plugin_name][$option_label] = $option_value;
@@ -634,5 +628,64 @@ class DiagnosticData {
         $transient_cache[$cache_key] = $transient_keys;
         
         return $transient_keys;
+    }
+    
+    /**
+     * Recursively mask sensitive fields in an array at any nesting level
+     *
+     * This recursive function traverses through an array structure and masks any
+     * sensitive field values it finds, regardless of how deeply nested they are.
+     * It checks all keys at all levels against the sensitive_fields list.
+     *
+     * @param array|mixed $data The data to process (array or value)
+     * @param array $sensitive_fields List of field names considered sensitive
+     * @return array|mixed The processed data with masked sensitive values
+     */
+    private function mask_sensitive_fields_recursive($data, $sensitive_fields) {
+        // If not an array or object, return as is
+        if (!is_array($data) && !is_object($data)) {
+            return $data;
+        }
+        
+        // Convert objects to arrays for consistent processing
+        if (is_object($data)) {
+            $data = (array) $data;
+        }
+        
+        // Process each key in the array
+        foreach ($data as $key => $value) {
+            // Check if this key is in the sensitive_fields list
+            if (in_array($key, $sensitive_fields, true)) {
+                // If the value is a string, mask it
+                if (is_string($value)) {
+                    $value_length = strlen($value);
+                    
+                    // Mask the value if long enough
+                    if ($value_length > 8) {
+                        $data[$key] = substr($value, 0, 4) . '...' . substr($value, -4);
+                    } elseif ($value_length > 0) {
+                        // For shorter values, show fewer characters
+                        $data[$key] = substr($value, 0, 2) . '...';
+                    }
+                } elseif (is_bool($value)) {
+                    // Keep boolean values as they are (they don't contain sensitive data)
+                    $data[$key] = $value;
+                } elseif (is_numeric($value)) {
+                    // For numeric values, mask partially
+                    $data[$key] = '****' . substr((string) $value, -2);
+                } elseif (is_null($value)) {
+                    // Keep null as null
+                    $data[$key] = null;
+                } elseif (is_array($value) || is_object($value)) {
+                    // For arrays/objects, replace with [REDACTED] to avoid exposing structure
+                    $data[$key] = '[REDACTED]';
+                }
+            } elseif (is_array($value) || is_object($value)) {
+                // Recursively process nested arrays/objects
+                $data[$key] = $this->mask_sensitive_fields_recursive($value, $sensitive_fields);
+            }
+        }
+        
+        return $data;
     }
 }

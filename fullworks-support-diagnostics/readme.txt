@@ -24,7 +24,7 @@ This plugin should only be activated when instructed by plugin support personnel
 * **Shortcode scanning** - Identifies shortcodes used across your site
 * **Freemius integration** - Collects license status and Freemius state for premium plugins
 * **REST API endpoints** - Allows secure remote diagnostics with temporary access links
-* **Sensitive data protection** - Masks API keys and other confidential information
+* **Advanced sensitive data protection** - Recursively masks API keys and confidential information at any nesting level
 * **Debug log monitoring** - Checks and displays the most recent log entries
 
 = Debug Management =
@@ -96,6 +96,36 @@ The plugin collects:
 = How do I integrate this with my plugin? =
 
 Add a support-config.json file to your plugin directory with specific diagnostics configuration. See example-support-config.json for reference.
+
+= How does the plugin handle sensitive data in nested arrays? =
+
+The plugin uses an advanced recursive algorithm to detect and mask sensitive fields at any nesting level. For example, if you specify "api_key" or "key" in your sensitive_fields list, the plugin will find and mask any field with that name regardless of where it appears in your data structure, including:
+* Top-level: settings["api_key"]
+* Nested inside objects: settings["main_settings"]["api_key"]
+* Within arrays: settings["keys"][0]["api_key"]
+* Complex nested structures: settings["Main Settings"]["key"][0]["key"]
+
+For example, with this data structure:
+```
+"Main Settings": {
+    "cache_clear": 0,
+    "cache_duration": 86400,
+    "key": [
+      {
+        "key": "JO7XNPSGZPZ4HXMPYIR4",
+        "label": "API Key 1"
+      }
+    ]
+}
+```
+
+Simply add "key" to your sensitive_fields array in support-config.json:
+```
+"sensitive_fields": ["api_key", "secret_token", "key", "password", "auth_token"],
+"mask_sensitive": true
+```
+
+This will automatically mask both the outer "key" array and the inner "key" value, resulting in protection at all levels.
 
 = How do I share diagnostic data securely? =
 

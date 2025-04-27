@@ -10,14 +10,22 @@
         {
             "option_name": "example_plugin_settings",
             "label": "Plugin Settings",
-            "sensitive_fields": ["api_key", "secret_token"],
-            "mask_sensitive": true
+            "sensitive_fields": ["api_key", "secret_token", "key", "password", "auth_token"],
+            "mask_sensitive": true,
+            "_comment": "Adding 'key' to sensitive_fields will mask it at any level in the structure, including inside arrays"
         },
         {
             "option_name": "example_plugin_cache",
             "label": "Plugin Cache",
             "summary_only": true,
             "summary_fields": ["last_updated", "version"]
+        },
+        {
+            "option_name": "example_plugin_api_config",
+            "label": "API Configuration",
+            "sensitive_fields": ["api_key", "client_secret", "token", "password"],
+            "mask_sensitive": true,
+            "_comment": "The plugin will mask these sensitive fields regardless of nesting level"
         }
     ],
     "shortcodes": [
