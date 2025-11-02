@@ -25,6 +25,7 @@
         "post-update-cmd": ["composer update -d fullworks-support-diagnostics",
             "wp i18n make-pot ./fullworks-support-diagnostics  ./fullworks-support-diagnostics/languages/fullworks-support-diagnostics.pot --skip-audit --exclude='./vendor'"
         ],
+        "build:assets": "echo 'No assets to build yet'",
         "phpcs": "phpcs fullworks-support-diagnostics -s --standard=phpcs_sec.xml --ignore=*/vendor/*  --extensions=php",
         "compat:8.3": "./vendor/bin/phpcs fullworks-support-diagnostics -s --standard=PHPCompatibilityWP --ignore=*/vendor/*  --extensions=php --runtime-set testVersion 8.3",
         "compat:8.2": "./vendor/bin/phpcs fullworks-support-diagnostics -s --standard=PHPCompatibilityWP --ignore=*/vendor/*  --extensions=php --runtime-set testVersion 8.2",
@@ -43,10 +44,10 @@
         "phpstan": "phpstan analyse",
         "test": "phpunit",
         "build": [
-            "rm -rf zipped",
+            "rm -rf zipped dist",
             "@composer install -d fullworks-support-diagnostics --no-dev",
-            "mkdir -p zipped",
-            "zip -r zipped/fullworks-support-diagnostics-free.zip fullworks-support-diagnostics"
+            "mkdir -p dist",
+            "zip -r dist/fullworks-support-diagnostics.zip fullworks-support-diagnostics"
         ]
     },
     "config": {

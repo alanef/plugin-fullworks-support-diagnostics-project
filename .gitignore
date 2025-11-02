@@ -24,9 +24,9 @@
 # Build files
 /build/
 /dist/
+/zipped/
 
 # Misc
 Thumbs.db
 *.log
-/zipped/fullworks-support-diagnostics.zip
 /.env.youtrack
