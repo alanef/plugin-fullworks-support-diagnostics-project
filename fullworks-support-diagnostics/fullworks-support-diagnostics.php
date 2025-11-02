@@ -52,6 +52,7 @@ function wpsa_initialize_plugin() {
 			'plugin_name'    => 'PluginPulse Connect',
 			'plugin_version' => WPSA_PLUGIN_VERSION,
 			'option_name'    => 'fwpsd_settings',
+			'plugin_url'     => WPSA_PLUGIN_URL,
 		)
 	);
 }
