@@ -1,0 +1,28 @@
+{
+  "name": "fullworks-support-diagnostics-project",
+  "version": "1.0.0",
+  "description": "Development workspace for the WordPress Support Assistant plugin",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "echo \"No linting configured yet\"",
+    "format": "echo \"No formatting configured yet\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alanef/plugin-fullworks-support-diagnostics-project.git"
+  },
+  "keywords": [
+    "wordpress",
+    "plugin",
+    "support",
+    "diagnostics"
+  ],
+  "author": "Fullworks <support@fullworksplugins.com>",
+  "license": "GPL-2.0-or-later",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "devDependencies": {}
+}
