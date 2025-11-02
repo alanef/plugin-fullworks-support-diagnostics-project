@@ -47,7 +47,7 @@
             "rm -rf zipped dist",
             "@composer install -d fullworks-support-diagnostics --no-dev",
             "mkdir -p dist",
-            "zip -r dist/fullworks-support-diagnostics.zip fullworks-support-diagnostics"
+            "wp dist-archive ./fullworks-support-diagnostics ./dist/fullworks-support-diagnostics.zip"
         ]
     },
     "config": {

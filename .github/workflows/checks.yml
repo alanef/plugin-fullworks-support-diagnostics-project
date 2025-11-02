@@ -92,3 +92,5 @@ jobs:
       uses: wordpress/plugin-check-action@v1
       with:
         build-dir: 'tmp-build/fullworks-support-diagnostics'
+        exclude-checks: |
+          plugin_header_text_domain

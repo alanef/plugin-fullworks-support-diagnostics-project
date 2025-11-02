@@ -11,6 +11,10 @@
 .distignore
 .nvmrc
 
+# Hidden files in vendor
+vendor/**/.git*
+vendor/**/.gitkeep
+
 # Documentation (keep README.md, exclude others)
 *.md
 !README.md
