@@ -2,6 +2,8 @@
 /vendor/
 /support-assiant-for-wp/vendor/
 
+# Library (separate git repository)
+/pluginpulse-connect-library/
 
 # Support Assistant Plugin's vendor
 /fullworks-support-diagnostics/vendor/

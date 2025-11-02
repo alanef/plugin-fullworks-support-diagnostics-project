@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "503376df43d6d3904ea83cf372abde0b",
+    "content-hash": "e295b06e494f03ebef2855bd53f5e853",
     "packages": [],
     "packages-dev": [
         {
@@ -1125,6 +1125,65 @@
                 }
             ],
             "time": "2024-12-05T13:48:26+00:00"
+        },
+        {
+            "name": "pluginpulse/connect-library",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./pluginpulse-connect-library",
+                "reference": "a8bfa6a5839e68dd37ac90dce69dab6f15f4adcf"
+            },
+            "require": {
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.6",
+                "squizlabs/php_codesniffer": "^3.7",
+                "wp-coding-standards/wpcs": "^2.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PluginPulse\\Library\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "PluginPulse\\Library\\Tests\\": "tests/"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "phpunit"
+                ],
+                "phpcs": [
+                    "phpcs src --standard=WordPress-Extra"
+                ]
+            },
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "PluginPulse",
+                    "email": "support@pluginpulse.io",
+                    "homepage": "https://pluginpulse.io"
+                }
+            ],
+            "description": "Embeddable diagnostic and monitoring library for WordPress plugins",
+            "homepage": "https://pluginpulse.io",
+            "keywords": [
+                "diagnostics",
+                "monitoring",
+                "plugin",
+                "support",
+                "wordpress"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "sebastian/cli-parser",
@@ -2478,9 +2537,11 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
-    "stability-flags": [],
-    "prefer-stable": false,
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "pluginpulse/connect-library": 20
+    },
+    "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": ">=7.0"
