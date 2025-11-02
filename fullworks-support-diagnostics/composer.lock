@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c3375a47cb55ffef3e6f4edbda7f7ead",
+    "content-hash": "3b1ebb9132cddf6d3282b330f6cd6262",
     "packages": [
         {
             "name": "pluginpulse/connect-library",
-            "version": "dev-master",
+            "version": "dev-develop",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alanef/pluginpulse-connect-library.git",
-                "reference": "327ce33abd68f0f3a26ff006f40412be30340455"
+                "reference": "3f8f87bcce7311a03b2ff60714f13809a6470e1e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alanef/pluginpulse-connect-library/zipball/327ce33abd68f0f3a26ff006f40412be30340455",
-                "reference": "327ce33abd68f0f3a26ff006f40412be30340455",
+                "url": "https://api.github.com/repos/alanef/pluginpulse-connect-library/zipball/3f8f87bcce7311a03b2ff60714f13809a6470e1e",
+                "reference": "3f8f87bcce7311a03b2ff60714f13809a6470e1e",
                 "shasum": ""
             },
             "require": {
@@ -28,7 +28,6 @@
                 "squizlabs/php_codesniffer": "^3.7",
                 "wp-coding-standards/wpcs": "^2.3"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -46,6 +45,9 @@
                 ],
                 "phpcs": [
                     "phpcs src --standard=WordPress-Extra"
+                ],
+                "post-update-cmd": [
+                    "wp i18n make-pot . ./languages/pluginpulse-connect.pot --skip-audit --domain=pluginpulse-connect"
                 ]
             },
             "license": [
@@ -71,7 +73,7 @@
                 "source": "https://github.com/alanef/pluginpulse-connect-library/tree/develop",
                 "issues": "https://github.com/alanef/pluginpulse-connect-library/issues"
             },
-            "time": "2025-11-02T20:27:17+00:00"
+            "time": "2025-11-02T22:29:02+00:00"
         }
     ],
     "packages-dev": [],
