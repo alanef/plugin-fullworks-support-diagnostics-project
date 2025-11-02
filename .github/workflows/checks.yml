@@ -80,11 +80,12 @@ jobs:
 
     - name: Extract library for scanning
       run: |
-        if [ -d "tmp-build/fullworks-support-diagnostics/vendor/pluginpulse/pluginpulse-connect-library" ]; then
+        if [ -d "tmp-build/fullworks-support-diagnostics/vendor/pluginpulse/connect-library" ]; then
           echo "Copying library to plugin root for Plugin Check scanning (vendor/ may be ignored)..."
-          cp -r tmp-build/fullworks-support-diagnostics/vendor/pluginpulse/pluginpulse-connect-library tmp-build/fullworks-support-diagnostics/
+          cp -r tmp-build/fullworks-support-diagnostics/vendor/pluginpulse/connect-library tmp-build/fullworks-support-diagnostics/pluginpulse-connect-library
         else
           echo "WARNING: Library not found in vendor"
+          ls -la tmp-build/fullworks-support-diagnostics/vendor/ || echo "No vendor directory"
         fi
 
     - name: WordPress Plugin Check

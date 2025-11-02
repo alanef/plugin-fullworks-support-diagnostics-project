@@ -39,9 +39,6 @@ bin
 # WordPress dev
 .wp-env.json
 
-# Dependencies (dev dependencies only, production vendor stays)
-vendor
-
 # OS files
 .DS_Store
 Thumbs.db
