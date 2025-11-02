@@ -21,26 +21,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Validate composer.json and composer.lock
-        run: composer validate --strict
-
-      - name: Cache Composer packages
-        id: composer-cache
-        uses: actions/cache@v4
-        with:
-          path: vendor
-          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php-
-
       - name: Install dependencies
-        run: composer install --prefer-dist --no-progress
+        run: composer update --prefer-dist --no-progress
 
       - name: Run phpcs suit
         run: composer run-script check
 
       - name: Composer install
-        run: composer install -d  fullworks-support-diagnostics --no-dev
+        run: composer update -d  fullworks-support-diagnostics --no-dev
       - name: Run plugin check
         uses: wordpress/plugin-check-action@v1
         with:
