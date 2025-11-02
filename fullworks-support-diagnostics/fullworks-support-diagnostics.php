@@ -24,25 +24,17 @@ define( 'WPSA_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'WPSA_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
 /**
- * Load PluginPulse Connect Library
- *
- * The library can be loaded from two locations:
- * 1. pluginpulse-connect-library/ - Symlink created by Composer (development)
- * 2. vendor/autoload.php - Standard Composer autoloader (fallback)
+ * Load Composer autoloader
  */
-if ( file_exists( WPSA_PLUGIN_DIR . 'pluginpulse-connect-library/src/autoload.php' ) ) {
-	// Development mode: Load library from symlinked directory (allows Plugin Check to scan it)
-	require_once WPSA_PLUGIN_DIR . 'pluginpulse-connect-library/src/autoload.php';
-} elseif ( file_exists( WPSA_PLUGIN_DIR . 'vendor/autoload.php' ) ) {
-	// Fallback: Load from standard Composer vendor directory
+if ( file_exists( WPSA_PLUGIN_DIR . 'vendor/autoload.php' ) ) {
 	require_once WPSA_PLUGIN_DIR . 'vendor/autoload.php';
 } else {
-	// No library found - show admin notice
+	// No autoloader found - show admin notice
 	add_action(
 		'admin_notices',
 		function () {
 			echo '<div class="notice notice-error"><p>';
-			echo '<strong>PluginPulse Connect:</strong> Library not found. Please run <code>composer install</code> in the plugin directory.';
+			echo '<strong>PluginPulse Connect:</strong> Dependencies not installed. Please run <code>composer install</code> in the plugin directory.';
 			echo '</p></div>';
 		}
 	);
@@ -59,10 +51,7 @@ function wpsa_initialize_plugin() {
 			'plugin_slug'    => 'fullworks-support-diagnostics',
 			'plugin_name'    => 'PluginPulse Connect',
 			'plugin_version' => WPSA_PLUGIN_VERSION,
-			'option_name'    => 'fwpsd_settings', // WordPress option name for settings storage
-			'library_path'   => file_exists( WPSA_PLUGIN_DIR . 'pluginpulse-connect-library' )
-				? WPSA_PLUGIN_DIR . 'pluginpulse-connect-library'
-				: WPSA_PLUGIN_DIR . 'vendor/pluginpulse/connect-library',
+			'option_name'    => 'fwpsd_settings',
 		)
 	);
 }

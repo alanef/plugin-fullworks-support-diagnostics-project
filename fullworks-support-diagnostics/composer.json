@@ -28,13 +28,5 @@
     "require": {
         "php": ">=7.0",
         "pluginpulse/connect-library": "@dev"
-    },
-    "scripts": {
-        "post-install-cmd": [
-            "test -L pluginpulse-connect-library || ln -s vendor/pluginpulse/connect-library pluginpulse-connect-library"
-        ],
-        "post-update-cmd": [
-            "test -L pluginpulse-connect-library || ln -s vendor/pluginpulse/connect-library pluginpulse-connect-library"
-        ]
     }
 }

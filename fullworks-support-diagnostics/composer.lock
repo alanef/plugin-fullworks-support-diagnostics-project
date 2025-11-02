@@ -60,13 +60,6 @@
                 "support",
                 "wordpress"
             ],
-            "support": {
-                "docs": "https://github.com/pluginpulse/pluginpulse-connect-library#readme",
-                "issues": "https://github.com/pluginpulse/pluginpulse-connect-library/issues",
-                "source": "https://github.com/pluginpulse/pluginpulse-connect-library",
-                "wiki": "https://github.com/pluginpulse/pluginpulse-connect-library/wiki",
-                "email": "support@pluginpulse.io"
-            },
             "transport-options": {
                 "symlink": true,
                 "relative": true

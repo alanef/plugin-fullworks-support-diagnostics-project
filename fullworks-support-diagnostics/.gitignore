@@ -1,8 +1,5 @@
 # Composer dependencies
 /vendor/
 
-# Library symlink (created by Composer post-install script)
-/pluginpulse-connect-library
-
 # WordPress plugin directory (if symlinked during development)
 .wp-env/
