@@ -1,0 +1,84 @@
+name: Quality Checks
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+  workflow_call:
+
+jobs:
+  quality-checks:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Extract PHP version
+      id: php_version
+      run: |
+        PHP_VERSION=$(grep -oP 'Requires PHP:\s*\K[\d.]+' fullworks-support-diagnostics/fullworks-support-diagnostics.php || echo "7.4")
+        echo "version=$PHP_VERSION" >> $GITHUB_OUTPUT
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ steps.php_version.outputs.version }}
+        tools: composer:v2, wp-cli
+        coverage: none
+
+    - name: Validate composer.json
+      run: composer validate --no-check-all --no-check-publish
+
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version-file: 'fullworks-support-diagnostics/.nvmrc'
+
+    - name: Build assets (npm + webpack)
+      run: composer run-script build:assets
+
+    - name: Run PHPCS WordPress Coding Standards
+      run: composer run-script check
+
+    - name: Run Security Checks
+      run: |
+        if composer show --installed | grep -q "phpcs-variable-analysis"; then
+          composer run-script phpcs-security
+        else
+          echo "Security checks using phpcs_sec.xml..."
+          composer run-script phpcs
+        fi
+
+    - name: Check version consistency
+      run: |
+        PLUGIN_VERSION=$(sed -n 's/ \* Version:\s*\(.*\)/\1/p' fullworks-support-diagnostics/fullworks-support-diagnostics.php | xargs)
+        CONSTANT_VERSION=$(sed -n "s/.*WIDGET_FOR_EVENTBRITE_API_PLUGIN_VERSION.*'\(.*\)'.*/\1/p" fullworks-support-diagnostics/fullworks-support-diagnostics.php | xargs)
+
+        echo "Plugin header version: $PLUGIN_VERSION"
+        echo "Version constant: $CONSTANT_VERSION"
+
+        if [ "$PLUGIN_VERSION" != "$CONSTANT_VERSION" ]; then
+          echo "Version mismatch detected!"
+          exit 1
+        fi
+
+    - name: Install WP-CLI dist-archive command
+      run: wp package install wp-cli/dist-archive-command
+
+    - name: Install plugin production dependencies
+      run: composer install --no-dev --prefer-dist --no-progress -d fullworks-support-diagnostics
+
+    - name: Build plugin
+      run: |
+        composer run-script build
+        mkdir tmp-build
+        unzip dist/fullworks-support-diagnostics.zip -d tmp-build
+
+    - name: WordPress Plugin Check
+      uses: wordpress/plugin-check-action@v1
+      with:
+        build-dir: 'tmp-build/fullworks-support-diagnostics'
