@@ -1,11 +1,11 @@
 <?php
 /**
- * Plugin Name: Fullworks Support Diagnostics
- * Plugin URI: https://fullworksplugins.com/products/support-diagnostics/
- * Description: Generates diagnostic information for support purposes based on plugin configurations.
+ * Plugin Name: PluginPulse Connect
+ * Plugin URI: https://pluginpulse.io
+ * Description: Connect your WordPress site to PluginPulse for proactive monitoring and instant diagnostic sharing with plugin developers.
  * Version: 1.0.0
- * Author: Fullworks
- * Author URI: https://fullworksplugins.com/
+ * Author: PluginPulse
+ * Author URI: https://pluginpulse.io
  * License: GPL-2.0+
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: fullworks-support-diagnostics

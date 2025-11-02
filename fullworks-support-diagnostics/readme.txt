@@ -1,6 +1,6 @@
-=== Fullworks Support Diagnostics ===
+=== PluginPulse Connect ===
 Contributors: alanfuller
-Tags: support, diagnostics, troubleshooting, debug, wp-config
+Tags: support, diagnostics, monitoring, troubleshooting, plugin-support
 Requires at least: 5.8
 Tested up to: 6.8
 Stable tag: 1.0.0
@@ -8,13 +8,29 @@ Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-A diagnostic tool that helps plugin developers provide better support by collecting relevant system information and managing debug constants.
+Connect your WordPress site to PluginPulse for proactive monitoring and instant diagnostic sharing with plugin developers.
 
 == Description ==
 
-Fullworks Support Diagnostics makes it easier for plugin developers to troubleshoot issues by automatically collecting diagnostic information and providing powerful debugging tools. It discovers installed plugins and provides a framework for plugin-specific diagnostic data collection.
+**PluginPulse Connect** is the bridge between your WordPress site and plugin developers who use PluginPulse monitoring. Share diagnostic data instantly with plugin support teams and enable proactive monitoring of your site.
 
-This plugin should only be activated when instructed by plugin support personnel for diagnostic purposes.
+= For Site Owners =
+
+* **Faster Support** - Share diagnostic data instantly with plugin support teams
+* **One-Click Reports** - Generate comprehensive diagnostic reports
+* **Privacy-Focused** - You control what data is shared
+* **Secure** - All data encrypted in transit
+
+= For Plugin Developers =
+
+Plugin developers using PluginPulse can:
+
+* Monitor customer sites proactively
+* Receive automatic diagnostics when issues are detected
+* Get real-time site health data
+* Prevent support tickets before they happen
+
+Sign up at [pluginpulse.io](https://pluginpulse.io) to start monitoring your customers.
 
 = Key Features =
 

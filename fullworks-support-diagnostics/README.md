@@ -1,10 +1,12 @@
-# WordPress Support Assistant
+# PluginPulse Connect
 
-A generic diagnostic tool for WordPress sites that automatically discovers compatible plugins and collects support information based on their configuration files.
+Connect your WordPress site to PluginPulse for proactive monitoring and instant diagnostic sharing with plugin developers.
 
 ## Purpose
 
-This plugin helps collect essential diagnostic information from WordPress sites to assist with troubleshooting. It's designed to work with any plugin that includes a `support-config.json` configuration file, making it a universal support tool.
+**PluginPulse Connect** is the bridge between your WordPress site and plugin developers who use [PluginPulse](https://pluginpulse.io) monitoring. It enables instant diagnostic sharing, proactive site monitoring, and faster support resolution.
+
+This plugin works with any plugin developer who includes a `support-config.json` configuration file, making it a universal support and monitoring tool.
 
 ## Features
 
@@ -265,4 +267,11 @@ The plugin can manage debug constants in wp-config.php:
 
 ## Support
 
-For issues or questions about this support tool, please contact support@fullworksplugins.com.
+For issues or questions about PluginPulse Connect:
+- Visit [pluginpulse.io](https://pluginpulse.io)
+- Plugin developers: Sign up to start monitoring your customers
+- Site owners: Contact your plugin developer for support
+
+## About PluginPulse
+
+PluginPulse is a monitoring and support platform for WordPress plugin developers. Learn more at [pluginpulse.io](https://pluginpulse.io).
