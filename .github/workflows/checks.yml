@@ -78,6 +78,15 @@ jobs:
         mkdir tmp-build
         unzip dist/fullworks-support-diagnostics.zip -d tmp-build
 
+    - name: Extract library for scanning
+      run: |
+        if [ -d "tmp-build/fullworks-support-diagnostics/vendor/pluginpulse/pluginpulse-connect-library" ]; then
+          echo "Copying library to plugin root for Plugin Check scanning (vendor/ may be ignored)..."
+          cp -r tmp-build/fullworks-support-diagnostics/vendor/pluginpulse/pluginpulse-connect-library tmp-build/fullworks-support-diagnostics/
+        else
+          echo "WARNING: Library not found in vendor"
+        fi
+
     - name: WordPress Plugin Check
       uses: wordpress/plugin-check-action@v1
       with:

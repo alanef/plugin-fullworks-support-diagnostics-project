@@ -3,7 +3,7 @@ Contributors: alanfuller
 Tags: support, diagnostics, monitoring, troubleshooting, plugin-support
 Requires at least: 5.8
 Tested up to: 6.8
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -162,6 +162,10 @@ Yes, the REST API endpoint can be disabled in the plugin settings. You can also 
 4. Freemius integration for premium plugins
 
 == Changelog ==
+
+= 1.1.0 =
+* Enhanced diagnostic capabilities
+* Improved compatibility and build process
 
 = 1.0.0 =
 * Initial release

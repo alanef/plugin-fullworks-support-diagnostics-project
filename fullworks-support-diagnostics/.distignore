@@ -1,37 +1,67 @@
+# Git files
 .git
 .gitignore
 .gitattributes
 .github
+
+# Editor config
 .editorconfig
+
+# Distribution files
+.distignore
+.nvmrc
+
+# Documentation (keep README.md, exclude others)
 *.md
+!README.md
+
+# Composer files
 composer.json
 composer.lock
+
+# Node/npm files
 package.json
 package-lock.json
+node_modules
+
+# PHP code quality
 phpcs.xml
 phpcs.xml.dist
 phpunit.xml
 phpunit.xml.dist
 .phpcs.xml
 .phpcs.xml.dist
+
+# Tests
 tests
 bin
+
+# WordPress dev
 .wp-env.json
-node_modules
+
+# Dependencies (dev dependencies only, production vendor stays)
 vendor
+
+# OS files
 .DS_Store
 Thumbs.db
+
+# Logs and temp files
 *.log
 *.sql
 *.zip
-.distignore
+
+# WordPress.org assets
 .wordpress-org
 assets-wp-repo
+
+# CI files
 .travis.yml
 .gitlab-ci.yml
+
+# IDE files
 .idea
 .vscode
 *.iml
 *.sublime-project
 *.sublime-workspace
-.nvmrc
