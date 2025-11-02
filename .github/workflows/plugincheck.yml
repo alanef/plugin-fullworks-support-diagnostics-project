@@ -43,6 +43,4 @@ jobs:
         uses: wordpress/plugin-check-action@v1
         with:
           build-dir: './fullworks-support-diagnostics'
-          exclude-directories: |
-            'vendor'
           
