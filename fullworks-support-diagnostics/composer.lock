@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/alanef/pluginpulse-connect-library.git",
-                "reference": "1057262acea7c07f58fdc8722e741b61c430fdb6"
+                "reference": "6802e2d2a8ef376b22d0b4b3ffbee80606cdcf43"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alanef/pluginpulse-connect-library/zipball/1057262acea7c07f58fdc8722e741b61c430fdb6",
-                "reference": "1057262acea7c07f58fdc8722e741b61c430fdb6",
+                "url": "https://api.github.com/repos/alanef/pluginpulse-connect-library/zipball/6802e2d2a8ef376b22d0b4b3ffbee80606cdcf43",
+                "reference": "6802e2d2a8ef376b22d0b4b3ffbee80606cdcf43",
                 "shasum": ""
             },
             "require": {
@@ -70,7 +70,7 @@
                 "source": "https://github.com/alanef/pluginpulse-connect-library/tree/develop",
                 "issues": "https://github.com/alanef/pluginpulse-connect-library/issues"
             },
-            "time": "2025-11-02T19:45:45+00:00"
+            "time": "2025-11-02T20:04:42+00:00"
         }
     ],
     "packages-dev": [],
