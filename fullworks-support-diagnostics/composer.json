@@ -19,11 +19,11 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/alanef/pluginpulse-connect-library.git"
+            "url": "https://github.com/alanef/pluginpulse-connect-library"
         }
     ],
     "require": {
         "php": ">=7.0",
-        "pluginpulse/connect-library": "dev-master as 1.0.x-dev"
+        "pluginpulse/connect-library": "dev-master"
     }
 }
