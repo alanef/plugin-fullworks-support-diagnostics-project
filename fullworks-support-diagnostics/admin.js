@@ -106,7 +106,7 @@ jQuery(document).ready(function($) {
             url: psdData.ajaxUrl,
             type: 'POST',
             data: {
-                action: 'fwpsd_generate_diagnostic_data',
+                action: 'pp_' + psdData.pluginSlug + '_generate_diagnostic_data', // Plugin-specific action (PAG-71)
                 nonce: psdData.nonce
             },
             success: function(response) {
@@ -184,7 +184,7 @@ jQuery(document).ready(function($) {
             url: psdData.ajaxUrl,
             type: 'POST',
             data: {
-                action: 'fwpsd_regenerate_keys',
+                action: 'pp_' + psdData.pluginSlug + '_regenerate_keys', // Plugin-specific action (PAG-71)
                 nonce: psdData.nonce
             },
             success: function(response) {

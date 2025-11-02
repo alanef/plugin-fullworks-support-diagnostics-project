@@ -4,13 +4,82 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2132544b2d44999775a5546b69802cd8",
-    "packages": [],
+    "content-hash": "9438b15046e0d92377c76250fbb8e2b5",
+    "packages": [
+        {
+            "name": "pluginpulse/connect-library",
+            "version": "dev-develop",
+            "dist": {
+                "type": "path",
+                "url": "../pluginpulse-connect-library",
+                "reference": "4b22251908f4f0a112c21dc06eccab045825ef81"
+            },
+            "require": {
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.6",
+                "squizlabs/php_codesniffer": "^3.7",
+                "wp-coding-standards/wpcs": "^2.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PluginPulse\\Library\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "PluginPulse\\Library\\Tests\\": "tests/"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "phpunit"
+                ],
+                "phpcs": [
+                    "phpcs src --standard=WordPress-Extra"
+                ]
+            },
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "PluginPulse",
+                    "email": "support@pluginpulse.io",
+                    "homepage": "https://pluginpulse.io"
+                }
+            ],
+            "description": "Embeddable diagnostic and monitoring library for WordPress plugins",
+            "homepage": "https://pluginpulse.io",
+            "keywords": [
+                "diagnostics",
+                "monitoring",
+                "plugin",
+                "support",
+                "wordpress"
+            ],
+            "support": {
+                "docs": "https://github.com/pluginpulse/pluginpulse-connect-library#readme",
+                "issues": "https://github.com/pluginpulse/pluginpulse-connect-library/issues",
+                "source": "https://github.com/pluginpulse/pluginpulse-connect-library",
+                "wiki": "https://github.com/pluginpulse/pluginpulse-connect-library/wiki",
+                "email": "support@pluginpulse.io"
+            },
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        }
+    ],
     "packages-dev": [],
     "aliases": [],
-    "minimum-stability": "stable",
-    "stability-flags": [],
-    "prefer-stable": false,
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "pluginpulse/connect-library": 20
+    },
+    "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": ">=7.0"
