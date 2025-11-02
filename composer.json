@@ -11,19 +11,6 @@
     ],
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "repositories": [
-        {
-            "type": "path",
-            "url": "./pluginpulse-connect-library",
-            "options": {
-                "symlink": true
-            }
-        }
-    ],
-    "require": {
-        "php": ">=7.0",
-        "pluginpulse/connect-library": "@dev"
-    },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.7",
         "wp-coding-standards/wpcs": "^2.3",

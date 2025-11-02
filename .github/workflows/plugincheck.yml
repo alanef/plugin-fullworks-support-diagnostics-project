@@ -27,8 +27,6 @@ jobs:
       - name: Run phpcs suit
         run: composer run-script check
 
-      - name: Composer install
-        run: composer update -d  fullworks-support-diagnostics --no-dev
       - name: Run plugin check
         uses: wordpress/plugin-check-action@v1
         with:
