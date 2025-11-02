@@ -24,6 +24,6 @@
     ],
     "require": {
         "php": ">=7.0",
-        "pluginpulse/connect-library": "dev-develop"
+        "pluginpulse/connect-library": "dev-master"
     }
 }

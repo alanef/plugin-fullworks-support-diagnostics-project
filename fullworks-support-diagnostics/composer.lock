@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b0e0eb27f16870da48c57ff358cecc15",
+    "content-hash": "3fe20e9c6ab78705ff1ba2e1ddec8087",
     "packages": [
         {
             "name": "pluginpulse/connect-library",
-            "version": "dev-develop",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alanef/pluginpulse-connect-library.git",
-                "reference": "adad410a49e78430da4e657a4d4557d7529a751a"
+                "reference": "327ce33abd68f0f3a26ff006f40412be30340455"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alanef/pluginpulse-connect-library/zipball/adad410a49e78430da4e657a4d4557d7529a751a",
-                "reference": "adad410a49e78430da4e657a4d4557d7529a751a",
+                "url": "https://api.github.com/repos/alanef/pluginpulse-connect-library/zipball/327ce33abd68f0f3a26ff006f40412be30340455",
+                "reference": "327ce33abd68f0f3a26ff006f40412be30340455",
                 "shasum": ""
             },
             "require": {
@@ -28,6 +28,7 @@
                 "squizlabs/php_codesniffer": "^3.7",
                 "wp-coding-standards/wpcs": "^2.3"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -70,7 +71,7 @@
                 "source": "https://github.com/alanef/pluginpulse-connect-library/tree/develop",
                 "issues": "https://github.com/alanef/pluginpulse-connect-library/issues"
             },
-            "time": "2025-11-02T20:20:37+00:00"
+            "time": "2025-11-02T20:27:17+00:00"
         }
     ],
     "packages-dev": [],
