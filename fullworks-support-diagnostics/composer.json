@@ -18,15 +18,12 @@
     "prefer-stable": true,
     "repositories": [
         {
-            "type": "path",
-            "url": "../pluginpulse-connect-library",
-            "options": {
-                "symlink": true
-            }
+            "type": "vcs",
+            "url": "https://github.com/alanef/pluginpulse-connect-library.git"
         }
     ],
     "require": {
         "php": ">=7.0",
-        "pluginpulse/connect-library": "@dev"
+        "pluginpulse/connect-library": "dev-develop"
     }
 }
