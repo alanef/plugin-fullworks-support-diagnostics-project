@@ -27,3 +27,4 @@
 Thumbs.db
 *.log
 /zipped/fullworks-support-diagnostics.zip
+/.env.youtrack

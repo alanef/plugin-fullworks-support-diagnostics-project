@@ -48,7 +48,7 @@
             "rm -rf zipped",
             "@composer install -d fullworks-support-diagnostics --no-dev",
             "mkdir -p zipped",
-            "zip -r zipped/fullworks-support-diagnostics.zip fullworks-support-diagnostics"
+            "zip -r zipped/fullworks-support-diagnostics-free.zip fullworks-support-diagnostics"
         ]
     },
     "config": {
