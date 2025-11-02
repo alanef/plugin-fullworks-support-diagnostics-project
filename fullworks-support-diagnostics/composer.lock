@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4e3fbaaef1b616d6a0e4c0108ae59fe6",
+    "content-hash": "6881c39543d7ae10612e7dfe171999c2",
     "packages": [
         {
             "name": "pluginpulse/connect-library",
@@ -75,14 +75,7 @@
         }
     ],
     "packages-dev": [],
-    "aliases": [
-        {
-            "package": "pluginpulse/connect-library",
-            "version": "9999999-dev",
-            "alias": "1.0.x-dev",
-            "alias_normalized": "1.0.9999999.9999999-dev"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
         "pluginpulse/connect-library": 20
