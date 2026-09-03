@@ -36,7 +36,8 @@
     "build": [
       "if [ -f fullworks-support-diagnostics/composer.json ]; then composer install -d fullworks-support-diagnostics --no-dev; fi",
       "mkdir -p zipped",
-      "wp dist-archive fullworks-support-diagnostics zipped/fullworks-support-diagnostics-free.zip --force"
+      "wp dist-archive fullworks-support-diagnostics zipped/fullworks-support-diagnostics-free.zip --force",
+      "zip -qd zipped/fullworks-support-diagnostics-free.zip fullworks-support-diagnostics/.distignore >/dev/null 2>&1 || true"
     ],
     "phpcs": "phpcs fullworks-support-diagnostics -s --standard=phpcs_sec.xml --ignore=*/vendor/* --extensions=php",
     "compat:8.4": "phpcs fullworks-support-diagnostics -s --standard=PHPCompatibilityWP --ignore=*/vendor/* --extensions=php --runtime-set testVersion 8.4",
