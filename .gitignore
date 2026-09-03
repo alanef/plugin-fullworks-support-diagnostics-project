@@ -1,32 +1,32 @@
-# Composer
-/vendor/
-/support-assiant-for-wp/vendor/
-
-# Library (separate git repository)
-/pluginpulse-connect-library/
-
-# Support Assistant Plugin's vendor
-/fullworks-support-diagnostics/vendor/
-
-# PHPUnit
-/tests/coverage/
-.phpunit.result.cache
-
-# PhpStorm/IDE files
 .idea/
+.vscode/
+.directory
+.DS_Store
+dist/
+build/
+zipped/
+tmp-build/
+node_modules/
+/vendor/
+/fullworks-support-diagnostics/vendor/
+/fullworks-support-diagnostics/includes/vendor/
+.phpunit.result.cache
+*.phpunit.result.cache
+.wp-env.override.json
+.env
+.env.*
+!.env.example
+*.log
+__pycache__/
+# repository specific
+/support-assiant-for-wp/vendor/
+/pluginpulse-connect-library/
+/tests/coverage/
 *.iml
 *.iws
-.DS_Store
-
-# Node modules
 /node_modules/
-
-# Build files
 /build/
 /dist/
-
-# Misc
 Thumbs.db
-*.log
 /zipped/fullworks-support-diagnostics.zip
 /.env.youtrack

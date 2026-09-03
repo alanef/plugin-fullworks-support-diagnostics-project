@@ -1,5 +1,8 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Managed by wordpress-plugin-boilerplate/tooling - fix there first, then run bin/sync-tooling.sh -->
 <phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
     bootstrap="tests/bootstrap.php"
     backupGlobals="false"
     colors="true"
@@ -8,16 +11,20 @@
     convertWarningsToExceptions="true"
     >
     <testsuites>
-        <testsuite name="unit">
-            <directory suffix="Test.php">./tests/Unit</directory>
-        </testsuite>
-        <testsuite name="integration">
-            <directory suffix="Test.php">./tests/Integration</directory>
+        <testsuite name="PluginPulse Connect Test Suite">
+            <!-- Either naming convention: tests/test-foo.php or tests/**/FooTest.php -->
+            <directory prefix="test-" suffix=".php">./tests</directory>
+            <directory suffix="Test.php">./tests</directory>
         </testsuite>
     </testsuites>
-    <filter>
-        <whitelist>
-            <directory suffix=".php">./fullworks-support-diagnostics/src</directory>
-        </whitelist>
-    </filter>
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">./fullworks-support-diagnostics</directory>
+        </include>
+        <exclude>
+            <directory>./fullworks-support-diagnostics/vendor</directory>
+            <directory>./fullworks-support-diagnostics/includes/vendor</directory>
+            <directory>./fullworks-support-diagnostics/languages</directory>
+        </exclude>
+    </coverage>
 </phpunit>

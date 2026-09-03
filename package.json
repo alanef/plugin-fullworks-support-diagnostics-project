@@ -1,0 +1,20 @@
+{
+  "name": "fullworks-support-diagnostics-project",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Development project for the PluginPulse Connect WordPress plugin",
+  "author": "Alan Fuller <alan@fullworks.net>",
+  "license": "GPL-2.0-or-later",
+  "scripts": {
+    "wp-env": "wp-env",
+    "start": "wp-env start",
+    "stop": "wp-env stop",
+    "destroy": "wp-env destroy",
+    "test": "./run-tests.sh",
+    "test:unit": "./run-tests.sh",
+    "build": "composer run-script build"
+  },
+  "devDependencies": {
+    "@wordpress/env": "^10.25.0"
+  }
+}
